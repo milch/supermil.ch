@@ -9,7 +9,7 @@ resource "aws_iam_server_certificate" "lets-encrypt" {
   certificate_body  = "${file("letsencrypt/ssl/supermil.ch/cert.pem")}"
   private_key       = "${file("letsencrypt/ssl/supermil.ch/privkey.pem")}"
   certificate_chain = "${file("letsencrypt/ssl/supermil.ch/chain.pem")}"
-  path              = "/cloudfront/letsencrypt"
+  path              = "/cloudfront/letsencrypt/"
 }
 
 resource "aws_s3_bucket" "s3-website-bucket" {
@@ -85,6 +85,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   viewer_certificate {
     iam_certificate_id = "${aws_iam_server_certificate.lets-encrypt.id}"
+	ssl_support_method = "sni-only"
+	minimum_protocol_version = "TLSv1"
   }
 }
 
