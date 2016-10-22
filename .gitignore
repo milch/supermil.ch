@@ -2,3 +2,4 @@
 public/
 
 infrastructure/private.tfvars
+/infrastructure/letsencrypt
