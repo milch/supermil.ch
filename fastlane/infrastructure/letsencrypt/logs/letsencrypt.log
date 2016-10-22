@@ -1,0 +1,6 @@
+2016-10-22 18:33:55,791:DEBUG:certbot.main:Root logging level set at 20
+2016-10-22 18:33:55,792:INFO:certbot.main:Saving debug log to /Users/manu/supermil.ch/fastlane/infrastructure/letsencrypt/logs/letsencrypt.log
+2016-10-22 18:33:55,793:DEBUG:certbot.main:certbot version: 0.9.3
+2016-10-22 18:33:55,793:DEBUG:certbot.main:Arguments: ['--config-dir', 'infrastructure/letsencrypt/config', '--logs-dir', 'infrastructure/letsencrypt/logs', '--work-dir', 'infrastructure/letsencrypt/work']
+2016-10-22 18:33:55,793:DEBUG:certbot.main:Discovered plugins: PluginsRegistry(PluginEntryPoint#nginx,PluginEntryPoint#standalone,PluginEntryPoint#manual,PluginEntryPoint#webroot,PluginEntryPoint#apache,PluginEntryPoint#null)
+2016-10-22 18:33:55,794:DEBUG:certbot.renewal:no renewal failures
