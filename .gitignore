@@ -3,3 +3,4 @@ public/
 
 infrastructure/private.tfvars
 /infrastructure/letsencrypt
+/.env
