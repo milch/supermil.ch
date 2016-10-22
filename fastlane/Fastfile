@@ -1,5 +1,44 @@
-lane :site do |opts|
+before_all do
+# 	ensure_git_status_clean
+end
 
+desc "Build the required infrastructure on AWS using terraform"
+lane :infra do 
+	terraform(
+		var_file: "private.tfvars",
+		state_file: "terraform.tfstate",
+		infrastructure_folder: "infrastructure"
+	)
+
+	# TODO: Maybe we should not make 2 commits here, but I don't care all that much
+	git_commit(
+		path: "infrastructure/terraform.tfstate",
+		message: "Updated state"
+	)
+	git_commit(
+		path: "infrastructure/terraform.tfstate.backup",
+		message: "Updated backup state"
+	)
+end
+
+desc "Renew SSL certificates with certbot"
+lane :ssl do 
+	sh "certbot renew"
+end
+
+desc "Publish a new version of the website"
+lane :site do |opts|
+	infra
+	ssl
+
+	bucket_name = sh "terraform output -state='infrastructure/terraform.tfstate' s3-bucket"
+
+	upload_folder_to_s3(
+		region: "eu-central-1",
+		bucket: bucket_name,
+		local_path: "public/",
+		remote_path: "."
+	)
 end
 
 # vim: set ft=ruby:
