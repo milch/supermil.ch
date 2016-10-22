@@ -13,6 +13,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = "${aws_s3_bucket.s3-website-bucket.id}.s3.amazonaws.com"
     origin_id   = "myS3Origin"
+    origin_path = "/public"
 
     s3_origin_config { 
       origin_access_identity = ""

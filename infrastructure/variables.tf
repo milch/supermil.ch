@@ -9,6 +9,10 @@ output "s3-bucket" {
   value = "${aws_s3_bucket.s3-website-bucket.id}.s3.amazonaws.com"
 }
 
+output "s3-bucket-name" {
+  value = "${aws_s3_bucket.s3-website-bucket.id}"
+}
+
 output "site" {
   value = "${aws_route53_record.site.fqdn}"
 }
