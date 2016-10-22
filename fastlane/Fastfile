@@ -10,21 +10,24 @@ end
 
 desc "Build the required infrastructure on AWS using terraform"
 lane :infra do 
-	terraform(
+	output = terraform(
 		var_file: "private.tfvars",
 		state_file: "terraform.tfstate",
 		infrastructure_folder: "infrastructure"
 	)
 
-	# TODO: Maybe we should not make 2 commits here, but I don't care all that much
-	git_commit(
-		path: "infrastructure/terraform.tfstate",
-		message: "Updated state"
-	)
-	git_commit(
-		path: "infrastructure/terraform.tfstate.backup",
-		message: "Updated backup state"
-	)
+	# Nothing to commit if nothing changed
+	unless output["no_changes?"] 
+		# TODO: Maybe we should not make 2 commits here, but I don't care all that much
+		git_commit(
+			path: "infrastructure/terraform.tfstate",
+			message: "Updated state"
+		)
+		git_commit(
+			path: "infrastructure/terraform.tfstate.backup",
+			message: "Updated backup state"
+		)
+	end
 end
 
 desc "Renew SSL certificates with certbot"
@@ -56,6 +59,7 @@ end
 desc "Publish a new version of the website"
 lane :publish_site do |opts|
 	infra
+	build
 	ssl
 	upload
 end

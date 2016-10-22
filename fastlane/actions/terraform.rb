@@ -27,6 +27,7 @@ module Fastlane
         outputs_idx = result.lines.index { |l| l.strip == "Outputs:"}
         output_vars_lines = result.lines.last(result.lines.count - (outputs_idx + 1) - 1)
         output_vars = {}
+        output_vars["no_changes?"] = result.lines.any? { |l| l =~ /0 added, 0 changed, 0 destroyed/ }
 
         output_vars_lines.each do |l|
           var = l.split("=")
@@ -36,6 +37,7 @@ module Fastlane
           value = var.last.gsub(/(\\\w)|(\[\d\w)/, "").strip
           output_vars.merge!(key => value)
         end
+
         output_vars
       end
 
