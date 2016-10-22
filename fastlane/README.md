@@ -5,6 +5,11 @@ fastlane documentation
 sudo gem install fastlane
 ```
 # Available Actions
+### build
+```
+fastlane build
+```
+Rebuild the static HTML
 ### infra
 ```
 fastlane infra
@@ -15,9 +20,14 @@ Build the required infrastructure on AWS using terraform
 fastlane ssl
 ```
 Renew SSL certificates with certbot
-### site
+### upload
 ```
-fastlane site
+fastlane upload
+```
+
+### publish_site
+```
+fastlane publish_site
 ```
 Publish a new version of the website
 

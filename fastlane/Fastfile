@@ -2,6 +2,11 @@ before_all do
 # 	ensure_git_status_clean
 end
 
+desc "Rebuild the static HTML"
+lane :build do
+	sh "cd .. && hugo"
+end
+
 desc "Build the required infrastructure on AWS using terraform"
 lane :infra do 
 	terraform(
@@ -23,22 +28,26 @@ end
 
 desc "Renew SSL certificates with certbot"
 lane :ssl do 
-	sh "certbot renew"
+	sh "cd .. && certbot --config-dir infrastructure/letsencrypt/config --logs-dir infrastructure/letsencrypt/logs --work-dir infrastructure/letsencrypt/work renew"
 end
 
-desc "Publish a new version of the website"
-lane :site do |opts|
-	infra
-	ssl
-
-	bucket_name = sh "terraform output -state='infrastructure/terraform.tfstate' s3-bucket"
+lane :upload do
+	bucket_name = sh "terraform output -state='../infrastructure/terraform.tfstate' s3-bucket-name"
+	bucket_name = bucket_name.strip
 
 	upload_folder_to_s3(
 		region: "eu-central-1",
 		bucket: bucket_name,
 		local_path: "public/",
-		remote_path: "."
+		remote_path: "public",
 	)
+end
+
+desc "Publish a new version of the website"
+lane :publish_site do |opts|
+	infra
+	ssl
+	upload
 end
 
 # vim: set ft=ruby:
