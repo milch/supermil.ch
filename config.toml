@@ -26,8 +26,7 @@ paginate = 5
 		bio = "\
         **I'm Manu!** \
         I'm a full stack engineer working on mobile apps. \
-        I'm studying to get my bachelors degree in Engineering Physics. \
-        I enjoy silly things, dogs and a good book on a rainy day. <br> \
+        I'm also currently studying Engineering Physics. <br> \
         🚀 \
         "
 
@@ -47,14 +46,19 @@ paginate = 5
 	[params.about]
 		hide  = false
 		title = "About Me"
-		content = """
-        In 2013, I founded the company [XForge Software Development](//xforge.at). <br>
-        At the moment I am working on the Fabric iOS App at Twitter. <br>
-        
-        
-        
-        If you are interested in hiring me, you can [contact me](#contact-form) or check out my [résumé](pdf/Resume-2016.pdf).
-        """
+        content = "\
+<h3>Company</h3> <br> \
+In 2013, I founded the company [XForge Software Development](//xforge.at). We build complete, native mobile solutions for our customers. Being in a small, three-person team, I learned a lot about working very efficiently - and not being afraid to jump into a project head first. <br> \
+<br> \
+<h3>Fastlane</h3> <br> \
+I am one of the core contributors of the popular [fastlane](https://github.com/fastlane/fastlane) project. Fastlane is used by thousands of developers all over the world and helped save countless wasted developer hours. <br>\
+<br> \
+<h3>❤️ Open Source</h3> <br> \
+This page, all of it's contents, the scripts used to create the whole setup on AWS and the deployment scripts are all [available on GitHub](https://github.com/milch/supermil.ch). <br>\
+<br> \
+<h3>Recruiters</h3> <br> \
+If you are interested in hiring me, you can [contact me](#contact-form) or take a look at my [résumé](pdf/Resume-2016.pdf).\
+"
 
     #TODO: Actually fill in my projects
 	[params.portfolio]
