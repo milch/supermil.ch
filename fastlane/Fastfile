@@ -4,6 +4,7 @@ end
 
 desc "Rebuild the static HTML"
 lane :build do
+	sh "rm -rf public"
 	sh "cd .. && hugo"
 end
 
@@ -28,18 +29,27 @@ end
 
 desc "Renew SSL certificates with certbot"
 lane :ssl do 
-	sh "cd .. && certbot --config-dir infrastructure/letsencrypt/config --logs-dir infrastructure/letsencrypt/logs --work-dir infrastructure/letsencrypt/work renew"
+	sh "mkdir -p ../public/challenge"
+	sh "cd .. && deps/dehydrated/dehydrated -c"
 end
 
-lane :upload do
+lane :upload do |opts|
+	if opts[:upload_challenge].nil? 
+		local_folder = "public/"
+		remote_path = "public"
+	else
+		local_folder = "public/challenge/"
+		remote_path = "public/.well-known/acme-challenge"
+	end
+	
 	bucket_name = sh "terraform output -state='../infrastructure/terraform.tfstate' s3-bucket-name"
 	bucket_name = bucket_name.strip
 
 	upload_folder_to_s3(
 		region: "eu-central-1",
 		bucket: bucket_name,
-		local_path: "public/",
-		remote_path: "public",
+		local_path: local_folder,
+		remote_path: remote_path,
 	)
 end
 

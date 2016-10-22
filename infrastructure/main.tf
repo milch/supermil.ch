@@ -4,6 +4,14 @@ provider "aws" {
     secret_key = "${var.aws_secret_key}"
 }
 
+resource "aws_iam_server_certificate" "lets-encrypt" {
+  name_prefix       = "lets-encrypt"
+  certificate_body  = "${file("letsencrypt/ssl/supermil.ch/cert.pem")}"
+  private_key       = "${file("letsencrypt/ssl/supermil.ch/privkey.pem")}"
+  certificate_chain = "${file("letsencrypt/ssl/supermil.ch/chain.pem")}"
+  path              = "/cloudfront/letsencrypt"
+}
+
 resource "aws_s3_bucket" "s3-website-bucket" {
   bucket = "supermil.ch-site"
   acl = "public-read"
@@ -76,7 +84,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    iam_certificate_id = "${aws_iam_server_certificate.lets-encrypt.id}"
   }
 }
 
