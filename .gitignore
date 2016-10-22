@@ -4,3 +4,4 @@ public/
 infrastructure/private.tfvars
 /infrastructure/letsencrypt
 /.env
+/fastlane/report.xml
