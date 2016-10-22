@@ -7,16 +7,38 @@ provider "aws" {
 resource "aws_s3_bucket" "s3-website-bucket" {
   bucket = "supermil.ch-site"
   acl = "public-read"
+
+  # The policy is needed because the public-read permissions don't transfer to all object in the bucket
+  policy = "{
+  \"Version\":\"2012-10-17\",
+  \"Statement\":[
+    {
+      \"Sid\":\"AddPerm\",
+      \"Effect\":\"Allow\",
+      \"Principal\": \"*\",
+      \"Action\":[\"s3:GetObject\"],
+      \"Resource\":[\"arn:aws:s3:::supermil.ch-site/*\"]
+    }
+  ]
+}"
+
+  website {
+    index_document = "index.html"
+    error_document = "public/404.html"
+  }
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = "${aws_s3_bucket.s3-website-bucket.id}.s3.amazonaws.com"
+    domain_name = "${aws_s3_bucket.s3-website-bucket.website_endpoint}"
     origin_id   = "myS3Origin"
     origin_path = "/public"
 
-    s3_origin_config { 
-      origin_access_identity = ""
+    custom_origin_config { 
+      http_port = "80"
+      https_port = "443"
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols = ["TLSv1.2"]
     }
   }
 
