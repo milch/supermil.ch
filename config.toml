@@ -37,7 +37,6 @@ paginate = 5
 		linkedin = "https://linkedin.com/in/milch"
 
 		copyright = [
-            "⚡️",
 			"&copy; Manu Wallner",
 			"Design: [HTML5 UP](//html5up.net)"
 		]
@@ -51,7 +50,7 @@ paginate = 5
 In 2013, I founded the company [XForge Software Development](//xforge.at). We build complete, native mobile solutions for our customers. Being in a small, three-person team, I learned a lot about working very efficiently - and not being afraid to jump into a project head first. <br> \
 <br> \
 <h3>Fastlane</h3> <br> \
-I am one of the core contributors of the popular [fastlane](https://github.com/fastlane/fastlane) project. Fastlane is used by thousands of developers all over the world and helped save countless wasted developer hours. <br>\
+I am one of the core contributors of the popular [fastlane](https://github.com/fastlane/fastlane) project. fastlane is used by thousands of developers all over the world and helped save countless developer hours. <br>\
 <br> \
 <h3>❤️ Open Source</h3> <br> \
 This page, all of it's contents, the scripts used to create the whole setup on AWS and the deployment scripts are all [available on GitHub](https://github.com/milch/supermil.ch). <br>\
