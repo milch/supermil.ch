@@ -1,5 +1,5 @@
 provider "aws" {
- 	region     = "eu-central-1"
+    region     = "eu-central-1"
     access_key = "${var.aws_access_key}"
     secret_key = "${var.aws_secret_key}"
 }
@@ -10,6 +10,10 @@ resource "aws_iam_server_certificate" "lets-encrypt" {
   private_key       = "${file("letsencrypt/ssl/supermil.ch/privkey.pem")}"
   certificate_chain = "${file("letsencrypt/ssl/supermil.ch/chain.pem")}"
   path              = "/cloudfront/letsencrypt/"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_s3_bucket" "s3-website-bucket" {
@@ -17,18 +21,20 @@ resource "aws_s3_bucket" "s3-website-bucket" {
   acl = "public-read"
 
   # The policy is needed because the public-read permissions don't transfer to all object in the bucket
-  policy = "{
-  \"Version\":\"2012-10-17\",
-  \"Statement\":[
+  policy = <<EOF
+{
+  "Version":"2012-10-17",
+  "Statement":[
     {
-      \"Sid\":\"AddPerm\",
-      \"Effect\":\"Allow\",
-      \"Principal\": \"*\",
-      \"Action\":[\"s3:GetObject\"],
-      \"Resource\":[\"arn:aws:s3:::supermil.ch-site/*\"]
+      "Sid":"AddPerm",
+      "Effect":"Allow",
+      "Principal": "*",
+      "Action":["s3:GetObject"],
+      "Resource":["arn:aws:s3:::supermil.ch-site/*"]
     }
   ]
-}"
+}
+EOF
 
   website {
     index_document = "index.html"
@@ -60,6 +66,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "myS3Origin"
+    compress = true
 
     forwarded_values {
       query_string = false
@@ -85,8 +92,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   viewer_certificate {
     iam_certificate_id = "${aws_iam_server_certificate.lets-encrypt.id}"
-	ssl_support_method = "sni-only"
-	minimum_protocol_version = "TLSv1"
+    ssl_support_method = "sni-only"
+    minimum_protocol_version = "TLSv1"
   }
 }
 
