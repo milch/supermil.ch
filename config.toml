@@ -25,8 +25,7 @@ paginate = 5
 		# Use Markdown to format the string. This works nearly all over the theme
 		bio = "\
         **I'm Manu!** \
-        I'm a full stack engineer working on mobile apps. \
-        I'm also currently studying Engineering Physics. <br> \
+        I'm a full stack engineer working on mobile apps. <br> \
         🚀 \
         "
 
