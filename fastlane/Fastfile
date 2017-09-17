@@ -4,8 +4,17 @@ end
 
 desc "Rebuild the static HTML"
 lane :build do
-	sh "rm -rf public"
+	require 'digest'
+
+	before = Dir["../public/**/*"].map do |f|
+		[f, File.file?(f) ? Digest::SHA2.hexdigest(File.read(f)) : nil]
+	end.to_h
 	sh "cd .. && hugo"
+
+	# Return changed files
+	Dir["../public/**/*"].select do |f|
+		File.file?(f) && Digest::SHA2.hexdigest(File.read(f)) != before[f]
+	end
 end
 
 desc "Build the required infrastructure on AWS using terraform"
@@ -43,12 +52,25 @@ lane :upload do |opts|
 	)
 end
 
+desc "Create a Cloudfront invalidation for the distribution"
+lane :invalidate_cache do |opts|
+	changed_files = opts[:changed].map { |f| f.sub(/^..\/public/, "") }
+
+	distribution_id = `terraform output -state='../infrastructure/terraform.tfstate' distribution-id`.strip
+	paths = if changed_files.empty?
+				"/*" 
+			else 
+				changed_files.join " "
+			end
+	`aws cloudfront create-invalidation --distribution-id #{distribution_id} --paths #{paths}`
+end
+
 desc "Publish a new version of the website"
 lane :publish_site do |opts|
 	infra
-	build
+	changed = build
 	ssl
 	upload
-end
 
-# vim: set ft=ruby:
+	invalidate_cache changed: changed
+end

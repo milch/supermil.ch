@@ -49,6 +49,11 @@ Renew SSL certificates with certbot
 fastlane upload
 ```
 
+### invalidate_cache
+```
+fastlane invalidate_cache
+```
+Create a Cloudfront invalidation for the distribution
 ### publish_site
 ```
 fastlane publish_site
