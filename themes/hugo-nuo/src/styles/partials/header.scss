@@ -7,10 +7,6 @@
   box-shadow: 0 1px 4px $box-shadow-darker;
   transition: all $easing $speed;
 
-  &:hover {
-    transform: rotate(180deg);
-  }
-
   @media screen and (max-width: $tablet) {
     position: absolute;
     top: 1rem;
@@ -20,6 +16,10 @@
     margin-top: 0;
     border: 2px solid $media-border;
   }
+}
+
+a.avatar-link {
+  opacity: 1;
 }
 
 .title {
