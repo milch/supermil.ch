@@ -20,4 +20,4 @@ This page, all of it's contents, the scripts used to create the whole setup on A
 
 
 ### Recruiters 
-If you are interested in talking to me about opportunities, you can [contact me](#contact-form) or take a look at my [CV](pdf/CV-2017.pdf).
+If you are interested in talking to me about opportunities, you can contact me via the sidebar or take a look at my [CV](pdf/CV-2017.pdf).

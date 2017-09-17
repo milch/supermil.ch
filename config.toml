@@ -28,7 +28,8 @@ copyright = "© 2017 Manu Wallner"
 	twitter = "acrooow"
 	github = "milch"
 	facebook = "apfel"
-	linkedin = "https://linkedin.com/in/milch"
+	linkedin = "milch"
+	email = "contact@supermil.ch"
 
 # Menu links that appear on the left sidebar
 [[menu.main]]
