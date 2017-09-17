@@ -58,6 +58,7 @@
 {{ if isset .Site.Params "baidusiteverification" }}<meta name="baidu-site-verification" content="{{ .Site.Params.baiduSiteVerification }}" />{{ end }}
 {{ if isset .Site.Params "sogousiteverification" }}<meta name="sogou_site_verification" content="{{ .Site.Params.sogouSiteVerification }}" />{{ end }}
 {{ if isset .Site.Params "sositeverification" }}<meta name="360-site-verification" content="{{ .Site.Params.soSiteVerification }}" />{{ end }}
+{{ if isset .Site.Params "twitter"}} <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> {{ end }}
 
 <!-- Favicon and Touch icons -->
 <meta name="apple-mobile-web-app-capable" content="yes" />

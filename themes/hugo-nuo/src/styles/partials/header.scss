@@ -34,7 +34,7 @@ a.avatar-link {
 }
 
 .subtitle {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   opacity: 0.7;
 }
 
@@ -62,6 +62,7 @@ a.avatar-link {
   .menu-list {
     list-style: none;
     padding: 0;
+    margin-top: 0;
   }
 
   .menu-item {
@@ -122,8 +123,16 @@ a.avatar-link {
     overflow-y: hidden;
     transition: all $easing $speed;
   }
+}
 
-  @media screen and (min-width: $tablet) and (max-height: $min-height) {
+.right-menu {
+  order: 2;
+  margin: 2rem;
+  margin-top: 1.5rem;
+  flex: 1;
+  max-width: 25rem;
+
+  @media screen and (max-width: $desktop) { //half sized windows don't get the tweets, they'd be annoying at that size
     display: none;
   }
 }
