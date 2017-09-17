@@ -5,3 +5,6 @@ infrastructure/private.tfvars
 /infrastructure/letsencrypt
 /fastlane/.env
 /fastlane/report.xml
+infrastructure/.terraform/
+infrastructure/terraform.tfstate
+infrastructure/terraform.tfstate.backup
