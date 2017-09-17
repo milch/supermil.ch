@@ -15,19 +15,6 @@ lane :infra do
 		state_file: "terraform.tfstate",
 		infrastructure_folder: "infrastructure"
 	)
-
-	# Nothing to commit if nothing changed
-	unless output["no_changes?"] 
-		# TODO: Maybe we should not make 2 commits here, but I don't care all that much
-		git_commit(
-			path: "infrastructure/terraform.tfstate",
-			message: "Updated state"
-		)
-		git_commit(
-			path: "infrastructure/terraform.tfstate.backup",
-			message: "Updated backup state"
-		)
-	end
 end
 
 desc "Renew SSL certificates with certbot"
