@@ -13,6 +13,12 @@ body {
   -moz-font-feature-settings: "liga" on;
   -webkit-tap-highlight-color: transparent;
   -webkit-overflow-scrolling: touch; // Smoothly on mobile browser
+
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+  }
 }
 
 a {
@@ -29,10 +35,6 @@ a {
 }
 
 .site-header {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
   width: 20rem;
   padding: 1rem;
   box-sizing: border-box;
@@ -61,11 +63,14 @@ a {
     width: 100%;
     position: relative;
   }
+
+  @media screen and (min-width: $tablet) {
+    order: -1;
+    flex-grow: 0;
+  }
 }
 
 .main {
-  position: relative;
-  margin-left: 20rem;
   padding: 1rem 2rem;
   max-width: 70rem;
   min-height: 100vh;
@@ -92,6 +97,11 @@ a {
     border-right: none;
     border-top: 1px solid $main-border;
     border-bottom: 1px solid $main-border;
+  }
+
+  @media screen and (min-width: $tablet) {
+    order: 1;
+    flex-grow: 1;
   }
 }
 
