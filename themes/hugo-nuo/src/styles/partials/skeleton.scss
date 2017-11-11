@@ -88,6 +88,10 @@ a {
     width: calc(100% - 20rem);
   }
 
+  @media screen and (min-width: $widescreen) {
+    width: calc(100% - 45rem);
+  }
+
   @media screen and (max-width: $tablet) {
     margin-left: 0;
     padding: 0 1rem;
