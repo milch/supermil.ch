@@ -1,7 +1,7 @@
 .DS_Store
 public/
 
-infrastructure/private.tfvars
+infrastructure/private*
 /infrastructure/letsencrypt
 /fastlane/.env
 /fastlane/report.xml

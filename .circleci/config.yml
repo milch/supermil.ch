@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    only:
+      - master
+    machine:
+      enabled: true
+    steps:
+      - checkout
+      # - restore_cache:
+      #     keys:
+      #       - website-cache
+      - restore_cache:
+          keys:
+            - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-{{ .Branch }}
+            - gem-cache
+      - run:
+          name: Install dependencies
+          command: |
+            curl -L -o hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.30.2/hugo_0.30.2_Linux-64bit.deb
+            sudo dpkg -i hugo.deb
+            bash .circleci/install_terraform.sh
+            gem install bundler
+            bundle install --path vendor/bundle
+      - save_cache:
+          key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Rebuild and upload the site
+          command: bundle exec fastlane publish_site
+      - save_cache:
+          key: website-cache
+          paths: 
+            - public/
