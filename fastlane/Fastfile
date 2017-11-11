@@ -27,7 +27,9 @@ end
 
 desc "Renew SSL certificates with certbot"
 lane :ssl do 
+	sh "cd .. && cp deps/dehytrated-config deps/dehydrated/config"
 	sh "mkdir -p ../public/challenge"
+	sh "mkdir -p ../infrastructure/letsencrypt"
 	sh "cd .. && deps/dehydrated/dehydrated -c"
 end
 
