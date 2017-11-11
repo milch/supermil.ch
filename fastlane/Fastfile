@@ -62,6 +62,7 @@ lane :invalidate_cache do |opts|
 			else 
 				changed_files.join " "
 			end
+	`aws configure set preview.cloudfront true`
 	`aws cloudfront create-invalidation --distribution-id #{distribution_id} --paths #{paths}`
 end
 
