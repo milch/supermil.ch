@@ -68,7 +68,7 @@ HOOK="${BASEDIR}/hook.sh"
 #HOOK_CHAIN="no"
 
 # Minimum days before expiration to automatically renew certificate (default: 30)
-RENEW_DAYS="30"
+RENEW_DAYS="60"
 
 # Regenerate private keys instead of just signing new certificates on renewal (default: yes)
 #PRIVATE_KEY_RENEW="yes"

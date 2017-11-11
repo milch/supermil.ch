@@ -4,6 +4,23 @@ provider "aws" {
     secret_key = "${var.aws_secret_key}"
 }
 
+terraform {
+  backend "s3" {
+    bucket = "supermil.ch-site"
+    key    = "terraform.tfstate"
+    region = "eu-central-1"
+  }
+}
+
+data "terraform_remote_state" "state" {
+  backend = "s3"
+  config {
+    bucket = "supermil.ch-site"
+    region = "eu-central-1"
+    key    = "terraform.tfstate"
+  }
+}
+
 resource "aws_iam_server_certificate" "lets-encrypt" {
   name_prefix       = "lets-encrypt"
   certificate_body  = "${file("letsencrypt/ssl/supermil.ch/cert.pem")}"

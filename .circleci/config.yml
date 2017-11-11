@@ -13,7 +13,6 @@ jobs:
       - restore_cache:
           keys:
             - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-{{ .Branch }}
             - gem-cache
       - run:
           name: Install dependencies
@@ -29,7 +28,7 @@ jobs:
           - vendor/bundle
       - run:
           name: Initialize Terraform
-          command: cd infrastructure && terraform init
+          command: cd infrastructure && terraform init 
       - run:
           name: Rebuild and upload the site
           command: bundle exec fastlane ssl

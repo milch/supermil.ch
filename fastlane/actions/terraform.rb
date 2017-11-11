@@ -52,7 +52,9 @@ module Fastlane
                                        optional: true
                                       ),
           FastlaneCore::ConfigItem.new(key: :state_file,
-                                       description: "Terraform state file"),
+                                       description: "Terraform state file",
+                                       optional: true
+                                      ),
           FastlaneCore::ConfigItem.new(key: :infrastructure_folder,
                                        description: "The subfolder where the whole infrastructure is defined",
                                        default_value: "."
