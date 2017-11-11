@@ -23,6 +23,8 @@ module Fastlane
           cmd << " -var '#{k}=#{v}'"
         end
 
+        cmd << " -auto-approve=true"
+
         result = Actions.sh cmd
         outputs_idx = result.lines.index { |l| l.strip == "Outputs:"}
         output_vars_lines = result.lines.last(result.lines.count - (outputs_idx + 1) - 1)
