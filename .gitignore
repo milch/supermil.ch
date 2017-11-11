@@ -2,7 +2,9 @@
 public/
 
 infrastructure/private*
-/infrastructure/letsencrypt
+/infrastructure/letsencrypt/*
+!infrastructure/letsencrypt/hook.sh
+!infrastructure/letsencrypt/domains.txt
 /fastlane/.env
 /fastlane/report.xml
 infrastructure/.terraform/
