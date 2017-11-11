@@ -9,6 +9,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
+            - website-cache-{{ .Revision }}
             - website-cache
       - restore_cache:
           keys:
@@ -33,7 +34,7 @@ jobs:
           name: Rebuild and upload the site
           command: bundle exec fastlane publish_site
       - save_cache:
-          key: website-cache
+          key: website-cache-{{ .Revision }}
           paths: 
             - public/
             - infrastructure/letsencrypt/
