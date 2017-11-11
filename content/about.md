@@ -12,7 +12,7 @@ In 2013, I founded the company [XForge Software Development](//xforge.at). We bu
 
 
 ### fastlane 🚀
-I am one of the core contributors of the popular [fastlane](https://github.com/fastlane/fastlane) project. fastlane is used by thousands of developers all over the world and as of November 2017 has saved over 10 million developer hours in total.
+I am one of the core contributors of the popular [fastlane](https://github.com/fastlane/fastlane) project. fastlane is used by thousands of developers all over the world and as of November 2017, it has saved over 10 million developer hours in total.
 
 
 ### Open Source
