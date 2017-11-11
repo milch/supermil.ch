@@ -132,7 +132,7 @@ a.avatar-link {
   flex: 1;
   max-width: 25rem;
 
-  @media screen and (max-width: $desktop) { //half sized windows don't get the tweets, they'd be annoying at that size
+  @media screen and (max-width: $widescreen) { //half sized windows don't get the tweets, they'd be annoying at that size
     display: none;
   }
 }
