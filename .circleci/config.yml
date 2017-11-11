@@ -7,9 +7,9 @@ jobs:
       enabled: true
     steps:
       - checkout
-      # - restore_cache:
-      #     keys:
-      #       - website-cache
+      - restore_cache:
+          keys:
+            - website-cache
       - restore_cache:
           keys:
             - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
@@ -31,7 +31,7 @@ jobs:
           command: cd infrastructure && terraform init 
       - run:
           name: Rebuild and upload the site
-          command: bundle exec fastlane ssl
+          command: bundle exec fastlane publish_site
       - save_cache:
           key: website-cache
           paths: 
