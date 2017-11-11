@@ -19,7 +19,7 @@ end
 
 desc "Build the required infrastructure on AWS using terraform"
 lane :infra do 
-	output = terraform(
+	terraform(
 		var_file: "private.tfvars",
 		state_file: "terraform.tfstate",
 		infrastructure_folder: "infrastructure"
@@ -66,7 +66,7 @@ lane :invalidate_cache do |opts|
 end
 
 desc "Publish a new version of the website"
-lane :publish_site do |opts|
+lane :publish_site do 
 	infra
 	changed = build
 	ssl
