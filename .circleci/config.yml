@@ -27,6 +27,9 @@ jobs:
           key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+			- run:
+					name: Initialize Terraform
+					command: cd infrastructure && terraform init
       - run:
           name: Rebuild and upload the site
           command: bundle exec fastlane publish_site
