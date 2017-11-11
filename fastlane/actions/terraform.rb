@@ -48,7 +48,9 @@ module Fastlane
       def self.available_options
         [
           FastlaneCore::ConfigItem.new(key: :var_file,
-                                       description: "Terraform var file"),
+                                       description: "Terraform var file",
+                                       optional: true
+                                      ),
           FastlaneCore::ConfigItem.new(key: :state_file,
                                        description: "Terraform state file"),
           FastlaneCore::ConfigItem.new(key: :infrastructure_folder,
