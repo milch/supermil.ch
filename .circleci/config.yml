@@ -14,11 +14,13 @@ jobs:
             - website-cache
       - restore_cache:
           keys:
-            - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache
+            - deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - deps-cache
       - run:
           name: Install dependencies
           command: |
+            cd ~
+
             sudo apt-get update --quiet && sudo apt-get install --assume-yes --quiet python-dev jq
             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
             unzip awscli-bundle.zip
@@ -28,14 +30,18 @@ jobs:
             curl -L -o hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.30.2/hugo_0.30.2_Linux-64bit.deb
             sudo dpkg -i hugo.deb
 
+            cd -
+
             bash .circleci/install_terraform.sh
 
             gem install bundler
             bundle install --path vendor/bundle
       - save_cache:
-          key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
           - vendor/bundle
+          - /var/cache/apt/archives
+          - ~/awscli-bundle
       - run:
           name: Initialize Terraform
           command: cd infrastructure && terraform init 
