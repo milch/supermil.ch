@@ -1,10 +1,11 @@
 version: 2
 jobs:
   build:
-    only:
-      - master
-    machine:
-      enabled: true
+    branches:
+        only:
+          - master
+    docker:
+      - image: circleci/ruby:2
     steps:
       - checkout
       - restore_cache:
@@ -18,9 +19,17 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            sudo apt-get update --quiet && sudo apt-get install --assume-yes --quiet python-dev jq
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            ./awscli-bundle/install -b ~/bin/aws
+            echo 'export PATH=~/bin:$PATH' >> $BASH_ENV
+
             curl -L -o hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.30.2/hugo_0.30.2_Linux-64bit.deb
             sudo dpkg -i hugo.deb
+
             bash .circleci/install_terraform.sh
+
             gem install bundler
             bundle install --path vendor/bundle
       - save_cache:
