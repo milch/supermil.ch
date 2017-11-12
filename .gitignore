@@ -12,3 +12,4 @@ infrastructure/terraform.tfstate
 infrastructure/terraform.tfstate.backup
 
 vendor/
+infrastructure/*.zip

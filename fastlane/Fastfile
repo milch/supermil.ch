@@ -19,6 +19,7 @@ end
 
 desc "Build the required infrastructure on AWS using terraform"
 lane :infra do 
+	`cd ../infrastructure && zip -r cloudfront_lambda.zip cloudfront_lambda.js`
 	terraform(
 		infrastructure_folder: "infrastructure"
 	)

@@ -1,5 +1,5 @@
 provider "aws" {
-    region     = "eu-central-1"
+    region     = "us-east-1"
     access_key = "${var.aws_access_key}"
     secret_key = "${var.aws_secret_key}"
 }
@@ -34,7 +34,7 @@ resource "aws_iam_server_certificate" "lets-encrypt" {
 }
 
 resource "aws_s3_bucket" "s3-website-bucket" {
-  bucket = "supermil.ch-site"
+  bucket = "supermil.ch-site-us"
   acl = "public-read"
 
   # The policy is needed because the public-read permissions don't transfer to all object in the bucket
@@ -47,7 +47,7 @@ resource "aws_s3_bucket" "s3-website-bucket" {
       "Effect":"Allow",
       "Principal": "*",
       "Action":["s3:GetObject"],
-      "Resource":["arn:aws:s3:::supermil.ch-site/*"]
+      "Resource":["arn:aws:s3:::supermil.ch-site-us/*"]
     }
   ]
 }
@@ -57,6 +57,37 @@ EOF
     index_document = "index.html"
     error_document = "public/404.html"
   }
+}
+
+resource "aws_iam_role" "iam_for_lambda" {
+  name = "iam_for_lambda"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "lambda.amazonaws.com",
+        "Service": "edgelambda.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_lambda_function" "cloudfront_lambda" {
+  filename         = "cloudfront_lambda.zip"
+  function_name    = "cloudfront_lambda"
+  role             = "${aws_iam_role.iam_for_lambda.arn}"
+  handler          = "cloudfront_lambda.handler"
+  source_code_hash = "${base64sha256(file("cloudfront_lambda.zip"))}"
+  runtime          = "nodejs6.10"
+  publish          = "true"
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
@@ -91,6 +122,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       cookies {
         forward = "none"
       }
+
+    }
+
+    lambda_function_association {
+      event_type = "viewer-response"
+      lambda_arn = "${aws_lambda_function.cloudfront_lambda.arn}:${aws_lambda_function.cloudfront_lambda.version}"
     }
 
     viewer_protocol_policy = "redirect-to-https"
@@ -110,7 +147,13 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   viewer_certificate {
     iam_certificate_id = "${aws_iam_server_certificate.lets-encrypt.id}"
     ssl_support_method = "sni-only"
-    minimum_protocol_version = "TLSv1"
+    minimum_protocol_version = "TLSv1.1_2016"
+  }
+
+  logging_config {
+    include_cookies = false
+    bucket = "${aws_s3_bucket.s3-website-bucket.bucket}"
+    prefix = "logs"
   }
 }
 
