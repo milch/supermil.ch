@@ -18,7 +18,7 @@ copyright = "© 2017 Manu Wallner"
 [params]
 	author = "Manu Wallner"
 	avatar = "/images/headshot.jpg"
-	subtitle = "Hi, I'm Manu! I'm a software engineer mostly working on mobile apps"
+	subtitle = "Software engineer mostly working on mobile apps. Jack of all trades, master of none. fastlane core contributor 🚀"
 	description = "This is my personal website"
 
 	# Format dates with Go's time formatting
@@ -27,18 +27,11 @@ copyright = "© 2017 Manu Wallner"
 	# The icons will be shown if you enter your username
 	twitter = "acrooow"
 	github = "milch"
-	facebook = "apfel"
 	linkedin = "milch"
 	email = "contact@supermil.ch"
 
 # Menu links that appear on the left sidebar
 [[menu.main]]
-	name = "Home"
+	name = "Blog"
 	url  = "/"
 	weight = 5
-
-[[menu.main]]
-	name = "GitHub"
-	weight = 20
-	identifier = "works"
-	url = "https://github.com/milch"
