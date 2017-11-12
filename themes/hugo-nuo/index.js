@@ -1,3 +1,5 @@
+import hljs from 'highlight.js';
+
 // Selected DOM elements
 const html = document.querySelector('html');
 const body = document.querySelector('body');
@@ -59,3 +61,6 @@ const scroll = new SmoothScroll('a[href*="#"]');
 toTopBtn.addEventListener('click', () => {
   scroll.animateScroll(0);
 });
+
+// Code highlighting
+hljs.initHighlightingOnLoad();

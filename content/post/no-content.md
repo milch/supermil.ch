@@ -9,3 +9,9 @@ title = "204 No Content"
 +++
 
 There is no content here yet. Sorry.
+
+```ruby
+def whatwhat(arg)
+  return "HI"
+end
+```

@@ -61,5 +61,7 @@
     "stylelint": "^8.0.0",
     "stylelint-config-standard": "^17.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "highlight.js": "^9.12.0"
+  }
 }
