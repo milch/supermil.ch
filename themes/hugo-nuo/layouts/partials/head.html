@@ -3,11 +3,9 @@
 {{ $avatar := "/img/avatar.jpg" }}
 
 {{ if eq .Type "post" }}
-
   <!-- Page Author & Description -->
   <meta name="author" content="{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}" />
   <meta name="description" content="{{ .Summary | plainify }}" />
-
   <!-- Twitter Card -->
   {{ if isset .Params "cover" }}
     <meta name="twitter:card" content="summary_large_image" />
@@ -22,20 +20,16 @@
     <meta name="twitter:description" content="{{ .Summary | plainify }}" />
     <meta name="twitter:image" content="{{ $avatar | absURL }}" />
   {{ end }}
-
 {{ else }}
-
   <!-- Site Author & Description -->
   <meta name="author" content="{{ .Site.Params.author }}" />
   <meta name="description" content="{{ .Site.Params.description }}" />
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@{{ .Site.Params.twitter | default $gohugoio }}" />
   <meta name="twitter:title" content="{{ if isset .Site.Params "seotitle" }}{{ .Site.Params.seotitle }}{{ else }}{{ .Site.Title }}{{ end }}" />
   <meta name="twitter:description" content="{{ .Site.Params.description }}" />
   <meta name="twitter:image" content="{{ $avatar | absURL }}" />
-
 {{ end }}
 
 <!-- Site Generator -->
@@ -78,8 +72,3 @@
 
 <!-- Styles -->
 <link rel="stylesheet" href="{{ "/css/bundle.css" | relURL }}" />
-<!-- Code Highlighting -->
-<link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>

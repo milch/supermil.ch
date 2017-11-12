@@ -9,7 +9,7 @@ export default {
   entry: './index.js',
   dest: './static/js/bundle.js',
   format: 'iife',
-  moduleName: "nuo",
+  moduleName: 'nuo',
   sourceMap: true,
   plugins: [
     resolve({ jsnext: true, browser: true }),
