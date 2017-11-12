@@ -6,17 +6,17 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "supermil.ch-site"
+    bucket = "supermil.ch-site-us"
     key    = "terraform.tfstate"
-    region = "eu-central-1"
+    region = "us-east-1"
   }
 }
 
 data "terraform_remote_state" "state" {
   backend = "s3"
   config {
-    bucket = "supermil.ch-site"
-    region = "eu-central-1"
+    bucket = "supermil.ch-site-us"
+    region = "us-east-1"
     key    = "terraform.tfstate"
   }
 }
@@ -152,8 +152,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   logging_config {
     include_cookies = false
-    bucket = "${aws_s3_bucket.s3-website-bucket.bucket}"
-    prefix = "logs"
+    bucket = "${aws_s3_bucket.s3-website-bucket.bucket_domain_name}"
+    prefix = "logs/"
   }
 }
 
