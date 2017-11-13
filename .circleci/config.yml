@@ -43,7 +43,11 @@ jobs:
           - ~/awscli-bundle
       - run:
           name: Initialize Terraform
-          command: cd infrastructure && terraform init && zip -r cloudfront_lambda.zip cloudfront_lambda.js && terraform plan
+          command: |
+            cd infrastructure && terraform init && zip -r cloudfront_lambda.zip cloudfront_lambda.js 
+
+            # Workaround for a terraform bug, the first apply will fail
+            terraform apply -auto-approve 2>&1 >/dev/null || true
       - run:
           name: Rebuild and upload the site
           command: bundle exec fastlane publish_site
