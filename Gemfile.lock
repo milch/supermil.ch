@@ -146,6 +146,7 @@ DEPENDENCIES
   aws-sdk (< 2)
   fastlane
   fastlane-plugin-upload_folder_to_s3
+  mime-types (~> 3.0)
 
 BUNDLED WITH
    1.15.4
