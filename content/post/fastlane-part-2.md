@@ -5,9 +5,11 @@ tags: ["fastlane", "CI/CD"]
 date: 2017-11-13T14:42:06+01:00
 ---
 
-In this post, we will take a look at how to integrate fastlane into your iOS app. This guide is for iOS, but the process should be similar on Android as well. We will go through the complete setup, and I will give you insights into the best practices with fastlane. This is the second post in the series, so if you are not sure yet whether fastlane is for you, check out the [first post]({{< relref "fastlane-part-1.md" >}}). So start your terminals and get ready!
+In this post, we will take a look at how to integrate fastlane into your iOS app. This guide is for iOS, but the process should be similar on Android as well.
 
 <!--more-->
+
+We will go through the complete setup, and I will give you insights into the best practices with fastlane. This is the second post in the series, so if you are not sure yet whether fastlane is for you, check out the [first post]({{< relref "fastlane-part-1.md" >}}). So start your terminals and get ready!
 
 ## Installation
 
