@@ -10,20 +10,20 @@
   <!-- Page Author & Description -->
   <meta name="author" content="{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}" />
   <meta name="description" content="{{ .Summary | plainify }}" />
+  <meta property="og:image" content="{{ $avatar | absURL }}" />
+  <meta property="og:title" content="{{ if isset .Site.Params "seotitle" }}{{ .Site.Params.seotitle }}{{ else }}{{ .Site.Title }}{{ end }}" />
+  <meta property="og:description" content="{{ .Summary | plainify }}" />
   <!-- Twitter Card -->
   {{ if isset .Params "cover" }}
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@{{ .Site.Params.twitter | default $gohugoio }}" />
-    <meta name="twitter:title" content="{{ .Title }}" />
-    <meta name="twitter:description" content="{{ .Summary | plainify }}" />
     <meta name="twitter:image" content="{{ .Params.cover | absURL }}" />
   {{ else }}
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@{{ .Site.Params.twitter | default $gohugoio }}" />
-    <meta name="twitter:title" content="{{ .Title }}" />
-    <meta name="twitter:description" content="{{ .Summary | plainify }}" />
     <meta name="twitter:image" content="{{ $avatar | absURL }}" />
   {{ end }}
+  <meta name="twitter:site" content="@{{ .Site.Params.twitter | default $gohugoio }}" />
+  <meta name="twitter:title" content="{{ .Title }}" />
+  <meta name="twitter:description" content="{{ .Summary | plainify }}" />
 {{ else }}
   <!-- Site Author & Description -->
   <meta name="author" content="{{ .Site.Params.author }}" />
