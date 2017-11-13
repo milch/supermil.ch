@@ -138,7 +138,7 @@ This simply uses a ruby gem to calculate the hashes for all the files in the `pu
 
 ## Wrapping up
 
-This concludes my first post in this series. I hope I've managed to convince you that fastlane is the way to go when it comes to deploying your app. In the next post in this series, we will be getting our hands dirty by actually setting up fastlane and integrating it into an existing app. 
+This concludes my first post in this series. I hope I've managed to convince you that fastlane is the way to go when it comes to deploying your app. In the [next post]({{< relref "fastlane-part-2.md" >}}) in this series, we will be getting our hands dirty by actually setting up fastlane and integrating it into an existing app. 
 
 As homework, I'm asking you to take a look at the [fastlane docs](https://docs.fastlane.tools). I know that most people will be thinking that docs are usually boring and hard to understand, which is why you are reading a blog post in the first place. Give me a chance to explain.
  
