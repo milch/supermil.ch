@@ -1,4 +1,7 @@
 import hljs from 'highlight.js';
+import SmoothScroll from 'smooth-scroll';
+import objectFitImages from 'object-fit-images';
+import 'classlist-polyfill';
 
 // Selected DOM elements
 const html = document.querySelector('html');
@@ -34,7 +37,6 @@ const randomErrorEmoji = () => {
 randomErrorEmoji();
 
 // Object-fit polyfill for post cover
-/* eslint-disable no-undef */
 objectFitImages('img.post-cover');
 
 // Show toTopBtn when scroll to 600px
