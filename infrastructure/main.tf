@@ -87,7 +87,6 @@ resource "aws_lambda_function" "cloudfront_lambda" {
   function_name    = "cloudfront_lambda"
   role             = "${aws_iam_role.iam_for_lambda.arn}"
   handler          = "cloudfront_lambda.handler"
-  source_code_hash = "${base64sha256(file("cloudfront_lambda.js"))}"
   runtime          = "nodejs6.10"
   publish          = "true"
 }

@@ -27,12 +27,11 @@ exports.handler = (event, context, callback) => {
 		value: "same-origin"
 	}];
     
-    // Pinned Keys are the Amazon intermediate: "s:/C=US/O=Amazon/OU=Server CA 1B/CN=Amazon" 
-    //   and LetsEncrypt "Let’s Encrypt Authority X1 (IdenTrust cross-signed)"
-	// headers['public-key-pins'] = [{
-	// 	key: 'Public-Key-Pins',
-	// 	value: 'pin-sha256="JSMzqOOrtyOT1kmau6zKhgT676hGgczD5VMdRMyJZFA="; pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg="; max-age=1296001; includeSubDomains'
-	// }];
+    // Pinned Keys: Let's Encrypt X3, DST Root CA X3
+    headers['public-key-pins'] = [{
+	key: 'Public-Key-Pins',
+	value: 'pin-sha256="ylh1dur9y6kja30rran7jknbqg/uetlmkbgff2fuihg="; pin-sha256="vjs8r4z+80wjncr1ykepwqbosiri63wswxhimn+ewys="; max-age=1296001; includeSubDomains'
+    }];
 
     callback(null, response);
 };
