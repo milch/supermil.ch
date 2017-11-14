@@ -36,11 +36,6 @@ jobs:
 
             gem install bundler
             bundle install --path vendor/bundle
-      - save_cache:
-          key: v1-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-          - vendor/bundle
-          - ~/awscli-bundle
       - run:
           name: Initialize Terraform
           command: |
@@ -51,6 +46,12 @@ jobs:
       - run:
           name: Rebuild and upload the site
           command: bundle exec fastlane publish_site
+      - save_cache:
+          key: v1-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+          - vendor/bundle
+          - ~/awscli-bundle
+          - infrastructure/cloudfront_lambda.zip
       - save_cache:
           key: website-cache-{{ .Revision }}
           paths: 
