@@ -34,12 +34,16 @@ jobs:
 
             bash .circleci/install_terraform.sh
 
-            gem install bundler
             bundle install --path vendor/bundle
+      - save_cache:
+          key: v1-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+          - vendor/bundle
+          - ~/awscli-bundle
       - run:
           name: Initialize Terraform
           command: |
-            cd infrastructure && terraform init && zip -r cloudfront_lambda.zip cloudfront_lambda.js 
+            cd infrastructure && terraform init && zip -u cloudfront_lambda.zip cloudfront_lambda.js || true
 
             # Workaround for a terraform bug, the first apply will fail
             terraform apply -auto-approve 2>&1 >/dev/null || true
@@ -47,13 +51,8 @@ jobs:
           name: Rebuild and upload the site
           command: bundle exec fastlane publish_site
       - save_cache:
-          key: v1-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-          - vendor/bundle
-          - ~/awscli-bundle
-          - infrastructure/cloudfront_lambda.zip
-      - save_cache:
           key: website-cache-{{ .Revision }}
           paths: 
             - public/
             - infrastructure/letsencrypt/
+            - infrastructure/cloudfront_lambda.zip
