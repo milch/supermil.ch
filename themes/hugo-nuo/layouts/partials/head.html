@@ -3,13 +3,13 @@
 {{ end }}
 
 {{ $gohugoio := "gohugoio" }}
-{{ $avatar := "/img/avatar.jpg" }}
+{{ $avatar := "/images/headshot.jpg" }}
 <!-- Site & Page Meta Data -->
+<meta property="og:image" content="{{ $avatar | absURL }}" />
 {{ if eq .Type "post" }}
   <!-- Page Author & Description -->
   <meta name="author" content="{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}" />
   <meta name="description" content="{{ .Summary | plainify }}" />
-  <meta property="og:image" content="{{ $avatar | absURL }}" />
   <meta property="og:title" content="{{ if isset .Site.Params "seotitle" }}{{ .Site.Params.seotitle }}{{ else }}{{ .Site.Title }}{{ end }}" />
   <meta property="og:description" content="{{ .Summary | plainify }}" />
   <!-- Twitter Card -->
@@ -27,6 +27,7 @@
   <!-- Site Author & Description -->
   <meta name="author" content="{{ .Site.Params.author }}" />
   <meta name="description" content="{{ .Site.Params.description }}" />
+  <meta property="og:description" content="{{ .Site.Params.description }}" />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@{{ .Site.Params.twitter | default $gohugoio }}" />
