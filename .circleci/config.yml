@@ -14,8 +14,8 @@ jobs:
             - website-cache
       - restore_cache:
           keys:
-            - v1-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - v1-deps-cache
+            - v2-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - v2-deps-cache
       - run:
           name: Install dependencies
           command: |
@@ -36,10 +36,9 @@ jobs:
 
             bundle install --path vendor/bundle
       - save_cache:
-          key: v1-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: v2-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
           - vendor/bundle
-          - ~/awscli-bundle
       - run:
           name: Initialize Terraform
           command: |
