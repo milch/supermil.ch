@@ -2,7 +2,7 @@
 title: "Working With fastlane Part 2: Integrating fastlane"
 author: "Manu Wallner"
 tags: ["fastlane", "CI/CD"]
-date: 2017-11-13T14:42:06+01:00
+date: 2017-12-02T11:40:00+01:00
 ---
 
 In this post, we will take a look at how to integrate fastlane into your iOS app. This guide is for iOS, but the process should be similar on Android as well.
@@ -30,7 +30,24 @@ brew cask install fastlane
 
 This is my preferred installation method. It has the advantage of coming with a complete, self-contained ruby installation and all required dependencies baked in. 
  
-This way is the most likely to work right out of the box, but there are some cases where other installation methods might be a better option. You can check out the docs link above if homebrew doesn't work for you. After this you are ready to start using fastlane.
+This way is most likely to work right out of the box, but there are some cases where other installation methods might be a better option. You can check out the docs link above if homebrew doesn't work for you. 
+
+There is one thing left to do before you can start using fastlane regardless of installation method, which is to configure your locale settings correctly. fastlane needs a UTF-8 locale or some of the tools won't work. In some cases you might only get warnings, in others builds might fail or hang until you cancel them.
+
+Setting the locale is as simple as setting the `LANG` and `LC_ALL` variables in your terminal: 
+
+```bash
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+```
+
+If you want to persist these settings, you need to edit your `~/.bashrc`, `~/.zshrc` or `~/.config/fish/config.fish` file and add the lines above. Which file you need to use depends on which shell you are using, `~/.bashrc` being the default on macOS. You could also run this simple script which will add the required lines to the correct files:
+
+```bash
+bash -c 'echo -e ".bashrc\n.zshrc\n.config/fish/config.fish" | while read f; do if [ -f $HOME/$f ]; then echo -e "export LC_ALL=en_US.UTF-8\nexport LANG=en_US.UTF-8" >> $HOME/$f; fi; done'
+```
+
+After this, restart your terminal and you are ready to start using fastlane.
 
 ## Getting Started
 
@@ -46,7 +63,7 @@ fastlane will proceed to ask you some questions about your project including you
 
 As soon as you confirm your app's bundle ID, a couple things will happen: 
 
-- If your app doesn't exist on the Apple Developer portal or on iTunes Connect [`produce`](https://docs.fastlane.tools/actions/produce/#produce) will create it
+- If your app doesn't exist on the Apple Developer portal or on iTunes Connect, [`produce`](https://docs.fastlane.tools/actions/produce/#produce) will create it
 - Any existing metadata from iTunes Connect will be downloaded by [`deliver`](https://docs.fastlane.tools/actions/deliver/#deliver) 
 - Your project settings will be detected by `fastlane`, or you will be asked to enter them manually if this is not possible, and a `Fastfile` will be created for you
 
@@ -57,10 +74,10 @@ Let's take a look at everything that fastlane has created for us:
 <img src="/images/fastlane-part-2/fastlane-dir.png" alt="fastlane directory, with Appfile, Deliverfile, Fastfile and metadata and screenshots folders">
 
 We can see that there is the `Fastfile` that we've talked about, but also an `Appfile` and `Deliverfile`.  
-The [Appfile](https://docs.fastlane.tools/advanced/#appfile) is a special kind of configuration file that is used by all the tools included in fastlane. It contains general project information like the Apple ID you entered for this project, the bundle ID and your team's ID.  
+The [Appfile](https://docs.fastlane.tools/advanced/#appfile) is a special kind of configuration file that is used by all the tools included in fastlane. It contains general project information like the Apple ID you entered for this project, the bundle ID, and your team's ID.  
 You can ignore the `Deliverfile` since you are using fastlane. 
 
-The `metadata` and `screenshots` folders contain everything that `deliver` managed to download from iTunes Connect. All the files in the `metadata` folder are simple text files and everything you hadn't filled out yet will be created for you. This allows you to check all your metadata into your SCM and treat it just like source code. How neat is that? 
+The `metadata` and `screenshots` folders contain everything that `deliver` managed to download from iTunes Connect. All the files in the `metadata` folder are simple text files, and everything you hadn't filled out yet will be created for you. This allows you to check all your metadata into your SCM and treat it just like source code. How neat is that? 
 
 fastlane creates some temporary files which you probably don't want to go into your repository.  
 Before we go on, it's helpful to add the following lines to your `.gitignore` file in your project directory:
@@ -83,7 +100,7 @@ fastlane/test_output
 
 If we take a look at the generated `Fastfile` we can see that it already includes some lanes and some other configuration.
 
-Something that we haven't discussed yet when I was talking about the DSL is the `platform` block: it simply scopes all the lanes it contains to a single platform.  
+Something that we haven't discussed yet when I was talking about the DSL is the `platform` block, which simply scopes all the lanes it contains to a single platform.  
 For a multi-platform project this allows you to have a single `Fastfile` to support all the platforms your project supports. 
 If you are using different platforms you would call the lanes from your command line with `fastlane <platform> <lane>`. 
 
@@ -147,7 +164,7 @@ Now you are ready to have `snapshot` take your screenshots for you.
 
 ##### Integrating with UI tests
 
-The easiest way to do this is to open your UI tests, create a new function `testTakeScreenshots` and then use Xcode's record function to navigate to the screens you want to take screenshots of.  
+The easiest way to do this is to open your UI tests, create a new function `testTakeScreenshots`, and then use Xcode's record function to navigate to the screens you want to take screenshots of.  
 Then you simply insert the line `snapshot(<filename>)` for each screenshot you want to take:
 
 ```swift
@@ -186,7 +203,7 @@ end
 ```
 
 Both TestFlight and the App Store require you to submit builds with differing build numbers, so it is a good idea to have fastlane do it for you.  
-It is really simple, don't worry: 
+Don't worry, it's really simple: 
 
 ```ruby
 lane :build do
