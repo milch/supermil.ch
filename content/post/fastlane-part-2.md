@@ -104,6 +104,8 @@ Something that we haven't discussed yet when I was talking about the DSL is the 
 For a multi-platform project this allows you to have a single `Fastfile` to support all the platforms your project supports. 
 If you are using different platforms you would call the lanes from your command line with `fastlane <platform> <lane>`. 
 
+If your project only has a single platform, you can remove the lines with `platform` from your `Fastfile` and place all your lanes at the top level of the file.
+
 Right off the bat, I would suggest you uncomment the line `update_fastlane` at the beginning. It will ensure that your fastlane installation is always up to date every time you run it. This is important because fastlane depends on Apple's webservers - which tend to have breaking API changes frequently and unexpectedly. 
 
 ### Setting up the Xcode project for fastlane
