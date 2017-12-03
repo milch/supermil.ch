@@ -30,6 +30,9 @@ copyright = "© 2017 Manu Wallner"
 	linkedin = "milch"
 	email = "contact@supermil.ch"
 
+	# Google Webmaster
+	googleSiteVerification = "gIp8qfvWI9C_HID8UmDJPd1HRrTVH8W5pqgGpT_-VsQ"
+
 # menu links that appear on the left sidebar
 [[menu.main]]
 	name = "blog"
