@@ -30,8 +30,13 @@ copyright = "© 2017 Manu Wallner"
 	linkedin = "milch"
 	email = "contact@supermil.ch"
 
-# Menu links that appear on the left sidebar
+# menu links that appear on the left sidebar
 [[menu.main]]
-	name = "Blog"
+	name = "blog"
 	url  = "/"
 	weight = 5
+[[menu.main]]
+  name = "Tags"
+  weight = 30
+  identifier = "tags"
+  url = "/tags/"

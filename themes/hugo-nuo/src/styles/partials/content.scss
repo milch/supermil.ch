@@ -11,13 +11,13 @@
 
   a {
     padding-bottom: 0.1em;
-    border-bottom: 1px dashed $green-light;
+    border-bottom: 1px dashed $primary-light;
     color: $primary;
     opacity: 1;
 
     &:focus,
     &:hover {
-      border-bottom: 1px solid $green-light;
+      border-bottom: 1px solid $primary-light;
     }
   }
 
@@ -138,8 +138,9 @@
     padding-bottom: 0.2em;
     margin: 0;
     font-size: 0.9em;
-    background-color: $code-background;
     font-family: $family-monospace;
+    background-color: $code-background;
+    color: $code-foreground;
 
     &::before,
     &::after {
@@ -172,6 +173,7 @@
     white-space: pre;
     word-wrap: normal;
     word-break: normal;
+    background-color: $code-background;
 
     code {
       font-size: 0.9rem;
