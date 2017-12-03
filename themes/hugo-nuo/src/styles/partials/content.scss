@@ -2,6 +2,8 @@
   position: relative;
   color: $text;
   line-height: 1.8;
+  word-wrap: break-word;
+  word-break: break-word;
 
   li + li {
     margin-top: 0.5rem;
@@ -9,13 +11,13 @@
 
   a {
     padding-bottom: 0.1em;
-    border-bottom: 1px dashed $green-light;
+    border-bottom: 1px dashed $primary-light;
     color: $primary;
     opacity: 1;
 
     &:focus,
     &:hover {
-      border-bottom: 1px solid $green-light;
+      border-bottom: 1px solid $primary-light;
     }
   }
 
@@ -136,8 +138,9 @@
     padding-bottom: 0.2em;
     margin: 0;
     font-size: 0.9em;
-    background-color: $pre-background;
     font-family: $family-monospace;
+    background-color: $code-background;
+    color: $code-foreground;
 
     &::before,
     &::after {
@@ -170,8 +173,7 @@
     white-space: pre;
     word-wrap: normal;
     word-break: normal;
-    background: $pre-background;
-    color: $text;
+    background-color: $code-background;
 
     code {
       font-size: 0.9rem;
@@ -306,16 +308,5 @@
     display: block;
     margin: 2rem auto;
     max-width: 100%;
-  }
-
-  .MathJax_Display {
-    margin: 2rem auto;
-  }
-
-  .MathJax_Display,
-  .MathJax {
-    &:focus {
-      outline: none;
-    }
-  }
+  } 
 }

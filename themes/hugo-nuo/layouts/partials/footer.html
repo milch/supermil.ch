@@ -4,7 +4,7 @@
 </footer>
 
 <!-- Scripts -->
-<script src="/js/bundle.js"></script>
+<script src="{{ "/js/bundle.js" | relURL }}"></script>
 {{ if .Site.GoogleAnalytics }}
   {{ with .Site.GoogleAnalytics }}
     <script>

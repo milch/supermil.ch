@@ -28,14 +28,19 @@ $white: rgb(255, 255, 255);
 $green: rgb(95, 191, 94);
 $green-light: rgba(70, 185, 128, 0.5);
 $green-invert: findcolorinvert($green);
+$red: #dc322f;
+$red-invert: findcolorinvert($red);
+$red-light: $red;
 
 /* Theme colors */
-$primary: $green;
-$primary-invert: $green-invert;
+$primary: $red;
+$primary-invert: $red-invert;
+$primary-light: $red-light;
 $light: $white-ter;
 $dark: $grey-darker;
 $background: $white-ter;
-$pre-background: rgb(246, 248, 250);
+$code-background: #f7f9fb;
+$code-foreground: #657b83;
 $main-background: $white;
 
 /* Text colors */
