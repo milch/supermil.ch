@@ -61,7 +61,10 @@ lane :invalidate_cache do |opts|
 	paths = if changed_files.empty?
 				"/*" 
 			else 
-				changed_files.join " "
+				# Need to add the base paths separately, because to cloudfront /<page>/ != /<page>/index.html
+				base_paths = changed_files.select { |c| c.end_with? "index.html" }.map { |i| i.sub("index.html", "") }
+				all_paths = changed_files + base_paths
+				all_paths.join(" ")
 			end
 	`aws configure set preview.cloudfront true`
 	`aws cloudfront create-invalidation --distribution-id #{distribution_id} --paths #{paths}`
