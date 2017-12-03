@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/laozhu/hugo-nuo.git
+	branch = master
+	commit = 6fa2d909797833169a8e9ee8df7e14aaaefc5e13
+	parent = 3066fe534b8bea9e72b627c1f7915f1b6889dc6d
+	cmdver = 0.3.1
