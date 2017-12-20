@@ -112,7 +112,7 @@ The change was introduced by me in this [Pull Request](https://github.com/fastla
 
 When looking through the issues we received on GitHub I noticed that a lot of incoming issues were caused at least in part by users not having their environment configured correctly. I made fastlane output a warning so that people could fix these issues without hours of troubleshooting: fastlane is about *saving* time after all. 
 
-The reason for this requirement is that a lot of fastlane tools interact with web APIs that use UTF-8 or they build on top of other tools that expect content to be encoded in UTF-8 or send content to fastlane that is encoded in UTF-8. 
+The reason for this requirement is that many parts of fastlane interact with web APIs that use UTF-8 or they build on top of other tools that expect content to be encoded in UTF-8, or that send content to fastlane that is encoded in UTF-8. 
 
-When fastlane is interacting with those applications and the environment is not configured correctly, bad things can happen: fastlane or the other application or web service can crash, it can hang indefinitely without 
+When fastlane is interacting with those applications or APIs and the environment is not configured correctly, bad things can happen: things can crash or hang indefinitely, without having any way to show a warning. In the worst case, uploaded data will be wrong. 
 
