@@ -48,7 +48,10 @@ jobs:
             terraform apply -auto-approve 2>&1 >/dev/null || true
       - run:
           name: Rebuild and upload the site
-          command: bundle exec fastlane publish_site
+          command: |
+            # This will make sure that the SSL cert is current
+            bundle exec fastlane ssl || true
+            bundle exec fastlane publish_site
       - save_cache:
           key: website-cache-{{ .Revision }}
           paths: 
