@@ -18,7 +18,7 @@ copyright = "© 2017 Manu Wallner"
 [params]
 	author = "Manu Wallner"
 	avatar = "/images/headshot.jpg"
-	subtitle = "Software engineer mostly working on mobile apps. Jack of all trades, master of none. fastlane core contributor 🚀"
+	subtitle = "Software engineer mostly working on mobile apps. Jack of all trades, master of none. fastlane core team member🚀 Mobile DevOps @ Amazon. Thoughts are my own."
 	description = "Personal Website. Occassional blog posts about Swift, iOS and fastlane"
 
 	# Format dates with Go's time formatting
