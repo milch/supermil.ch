@@ -1,5 +1,5 @@
 before_all do
- 	ensure_git_status_clean
+	ensure_git_status_clean
 end
 
 desc "Rebuild the static HTML"
@@ -30,7 +30,7 @@ lane :ssl do
 	sh "cd .. && cp deps/dehytrated-config deps/dehydrated/config"
 	sh "mkdir -p ../public/challenge"
 	sh "mkdir -p ../infrastructure/letsencrypt"
-	sh "cd .. && deps/dehydrated/dehydrated -c"
+	sh "cd .. && deps/dehydrated/dehydrated --accept-terms --cron"
 end
 
 lane :upload do |opts|
