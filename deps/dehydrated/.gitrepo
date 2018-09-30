@@ -6,6 +6,6 @@
 [subrepo]
 	remote = https://github.com/lukas2511/dehydrated.git
 	branch = master
-	commit = 607c89cae2cac91ee5baa42d991cf95def9e1172
-	parent = dd787ae05abc1f8f1151c2a719d8da6b0c677373
-	cmdver = 0.3.0
+	commit = fba49ba28eb746eae127aa36e7f515beeaf0bbae
+	parent = de90e2777f163e0106bc6c0c43bc82516e6afde0
+	cmdver = 0.3.1
