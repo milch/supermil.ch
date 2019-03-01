@@ -3,8 +3,10 @@
 
 cd ~
 
+terraform_version="0.11.11"
+
 # Get URLs for most recent versions
-terraform_url=$(curl https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep "linux.*amd64" | sort --version-sort -r | head -1 | awk -F[\"] '{print $4}')
+terraform_url=$(curl https://releases.hashicorp.com/index.json | jq -r "{terraform}.terraform.versions.\"${terraform_version}\".builds[] | select(.os == \"linux\" and .arch == \"amd64\").url")
 cd
 mkdir terraform && cd $_
 
