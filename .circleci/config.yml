@@ -34,7 +34,7 @@ jobs:
 
             bash .circleci/install_terraform.sh
 
-            bundle install --path vendor/bundle
+            bundle update --bundler && bundle install --path vendor/bundle
       - save_cache:
           key: v2-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
