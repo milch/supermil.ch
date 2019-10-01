@@ -1,5 +1,6 @@
 before_all do
 	ensure_git_status_clean
+	ENV["IP_VERSION"] = "4"
 end
 
 desc "Rebuild the static HTML"
