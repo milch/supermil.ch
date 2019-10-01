@@ -17,6 +17,13 @@ jobs:
             - v2-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - v2-deps-cache
       - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+
+      - run:
           name: Install dependencies
           command: |
             cd ~
@@ -34,7 +41,7 @@ jobs:
 
             bash .circleci/install_terraform.sh
 
-            bundle update --bundler && bundle install --path vendor/bundle
+            bundle install --path vendor/bundle
       - save_cache:
           key: v2-deps-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
