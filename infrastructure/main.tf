@@ -132,7 +132,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       lambda_arn = "${aws_lambda_function.cloudfront_lambda.arn}:${aws_lambda_function.cloudfront_lambda.version}"
     }
 
-    viewer_protocol_policy = "redirect-to-https"
+    viewer_protocol_policy = "allow-all"
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
